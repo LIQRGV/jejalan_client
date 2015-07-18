@@ -84,3 +84,9 @@ define('EXIT_USER_INPUT', 7); // invalid user input
 define('EXIT_DATABASE', 8); // database error
 define('EXIT__AUTO_MIN', 9); // lowest automatically-assigned error code
 define('EXIT__AUTO_MAX', 125); // highest automatically-assigned error code
+
+/*
+	Custom constant
+*/
+define('JEJALAN_SERVER_URL','http://localhost:8080/co.id.jejalan/rest/');
+define('TIKET_SERVER_URL','https://api-sandbox.tiket.com/'); // for development only

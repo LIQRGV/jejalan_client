@@ -8,9 +8,9 @@
     <title>SHA</title>
 
 
-    <link href="lib/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<link href="lib/vendor/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
-	<link href="lib/vendor/bootstrap/css/offcanvas.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="<?php echo asset_url();?>vendor/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+	<link href="<?php echo asset_url();?>vendor/bootstrap/css/offcanvas.css" rel="stylesheet">
 
   </head>
   <body>
@@ -27,7 +27,7 @@
             <span class="icon-bar"></span>
             <span class="icon-bar"></span>
           </button>
-          <a class="navbar-brand" href="#">Project name</a>
+          <a class="navbar-brand" href="<?php echo asset_url();?>#">Project name</a>
 			<div class="navbar-brand hidden-xs " style="padding-top:10px;">
 				<input type="text" class="form-control " style="width:400px; margin-left:25%;"placeholder="Search...">
 			</div>
@@ -40,7 +40,7 @@
           <ul class="nav navbar-nav" >
 			
             <li class="dropdown ">
-              <a href="#" class="dropdown-toggle " data-toggle="dropdown">Login <b class="caret"></b></a>
+              <a href="<?php echo asset_url();?>#" class="dropdown-toggle " data-toggle="dropdown">Login <b class="caret"></b></a>
               <ul class="dropdown-menu">
                 <li style="margin:5px;">
 					<input type="text" class="form-control" placeholder="Username" required autofocus>
@@ -54,7 +54,7 @@
               </ul>
             </li>
 			<li >
-				<a href="registrasi.html" >Sign-in</a>
+				<a href="<?php echo asset_url();?>registrasi.html" >Sign-in</a>
 			</li>
           </ul>
 
@@ -69,8 +69,8 @@
 		<div class="row row-offcanvas row-offcanvas-right">
 			<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
 			  <div class="list-group">
-				<a href="#" class="list-group-item active">My Profile</a>
-				<a href="#" class="list-group-item">Post</a>
+				<a href="<?php echo asset_url();?>#" class="list-group-item active">My Profile</a>
+				<a href="<?php echo asset_url();?>#" class="list-group-item">Post</a>
 
 			  </div>
 			</div>
@@ -126,29 +126,58 @@
 		<footer>
 			<p>&copy; Halo :D</p>
 		</footer>		
-		<form id="my_form" action="/upload/" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
-			<input name="image" type="file" onchange="$('#my_form').submit();this.value='';">
+		<form id="my_form" action="<?php echo base_url();?>upload" target="form_target" method="post" enctype="multipart/form-data" style="width:0px;height:0;overflow:hidden">
+			<input name="image" id="image" type="file">
 		</form>
     </div><!--/.container-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="lib/vendor/js/jquery-1.11.2.min.js"></script>
+    <script src="<?php echo asset_url();?>vendor/js/jquery-1.11.2.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="lib/vendor/bootstrap/js/bootstrap.js"></script>
-	<script src="lib/vendor/bootstrap/js/offcanvas.js"></script>
-	<script src="lib/vendor/tinymce/js/tinymce/tinymce.min.js"></script>
-	<script src="lib/vendor/tinymce/js/tinymce/plugins/image/plugin.min.js"></script>
-	<script>
+    <script src="<?php echo asset_url();?>vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="<?php echo asset_url();?>vendor/bootstrap/js/offcanvas.js"></script>
+	<script src="<?php echo asset_url();?>vendor/tinymce/js/tinymce/tinymce.min.js"></script>
+	<script src="<?php echo asset_url();?>vendor/tinymce/js/tinymce/plugins/image/plugin.min.js"></script>
+
+    <script src="<?php echo asset_url();?>vendor/jquery.form/jquery.form.js"></script>
+    <script>
+        $('input[name=image]').change(
+          function(e){
+              var parent = $(this).parent();
+              parent.ajaxSubmit(
+                  {
+                      url       : "<?php echo base_url();?>/Post/save",
+                      success   : function(data,status,jqXHR){
+                          var obj = JSON.parse(data);
+                          if(obj.result == "success")
+                          {
+                              var currentText = tinyMCE.activeEditor.getContent();
+                              var img   = $('<img></img>');
+                              var assetFolder = '<?php echo asset_url();?>';
+                              var uploadImageDir = 'img/'
+                              img.attr('src',assetFolder+uploadImageDir+obj.filename);
+                              var rawImg = img.wrap('<div>').parent().html();
+                              var targetText = currentText+"<br />"+rawImg;
+                              tinyMCE.activeEditor.setContent(targetText);
+                          } else
+                          {
+                              // idk what to do lalalala~~~
+                          }
+                      }
+                  }
+              );
+          }
+        );
 		$('.dropdown-toggle').dropdown();
 		tinymce.init({
 			selector: ".tinymce",
-			plugins: ["image"],
+			plugins: ["image","autoresize"],
 			file_browser_callback: function(field_name, url, type, win) {
 				console.log(field_name);
 				console.log(url);
 				console.log(type);
 				console.log(win);
-				if(type=='image') $('#my_form input').click();
+				if(type=='image') $('form input').click();
 			}
 		 });
 	</script>

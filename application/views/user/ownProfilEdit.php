@@ -8,9 +8,9 @@
     <title>SHA</title>
 
 
-    <link href="lib/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<link href="lib/vendor/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
-	<link href="lib/vendor/bootstrap/css/offcanvas.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="<?php echo asset_url();?>/vendor/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+	<link href="<?php echo asset_url();?>/vendor/bootstrap/css/offcanvas.css" rel="stylesheet">
 
   </head>
   <body>
@@ -78,7 +78,7 @@
 			<div class="col-xs-12 col-sm-9">
 				<div class="row">
 					<div class="col-md-12">
-						<img src="lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
+						<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
 					</div>
 					<div class="col-md-9">
 						<h3>
@@ -144,10 +144,10 @@
     </div><!--/.container-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="lib/vendor/js/jquery-1.11.2.min.js"></script>
+    <script src="<?php echo asset_url();?>/vendor/js/jquery-1.11.2.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="lib/vendor/bootstrap/js/bootstrap.js"></script>
-	<script src="lib/vendor/bootstrap/js/offcanvas.js"></script>
+    <script src="<?php echo asset_url();?>/vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="<?php echo asset_url();?>/vendor/bootstrap/js/offcanvas.js"></script>
 	
 	<script>
 		$('.dropdown-toggle').dropdown()

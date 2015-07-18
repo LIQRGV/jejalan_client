@@ -8,9 +8,9 @@
     <title>SHA</title>
 
 
-    <link href="lib/vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<link href="lib/vendor/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
-	<link href="lib/vendor/bootstrap/css/offcanvas.css" rel="stylesheet">
+    <link href="<?php echo asset_url();?>vendor/bootstrap/css/bootstrap.css" rel="stylesheet">
+	<link href="<?php echo asset_url();?>vendor/bootstrap/css/bootstrap-theme.css" rel="stylesheet">
+	<link href="<?php echo asset_url();?>vendor/bootstrap/css/offcanvas.css" rel="stylesheet">
 
   </head>
   <body>
@@ -86,7 +86,7 @@
 							<div class="col-md-12" style="background:#f6f6f6;padding:1%;border:1px #e0e0e0 solid;">
 								<h3>Title 1</h3>
 								<div class="col-md-3">
-									<img src="lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
+									<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
 								</div>
 								
 								<div class="col-md-9">
@@ -99,7 +99,7 @@
 							<div class="col-md-12" style="background:#f6f6f6;padding:1%;border:1px #e0e0e0 solid;">
 								<h3>Title 1</h3>
 								<div class="col-md-3">
-									<img src="lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
+									<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
 								</div>
 								
 								<div class="col-md-9">
@@ -112,7 +112,7 @@
 							<div class="col-md-12" style="background:#f6f6f6;padding:1%;border:1px #e0e0e0 solid;">
 								<h3>Title 1</h3>
 								<div class="col-md-3">
-									<img src="lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
+									<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail" alt="Responsive image">
 								</div>
 								
 								<div class="col-md-9">
@@ -121,22 +121,9 @@
 								
 								</div>
 							</div>
-							
-							
-							
-							
-							
 						</div>
-						
-								
 					</div>
-					
-					
-					
-					
-					
 				</div>
-				
 			</div>
 		</div>
         <!--/span-->
@@ -151,10 +138,10 @@
     </div><!--/.container-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
-    <script src="lib/vendor/js/jquery-1.11.2.min.js"></script>
+    <script src="<?php echo asset_url();?>vendor/js/jquery-1.11.2.min.js"></script>
     <!-- Include all compiled plugins (below), or include individual files as needed -->
-    <script src="lib/vendor/bootstrap/js/bootstrap.js"></script>
-	<script src="lib/vendor/bootstrap/js/offcanvas.js"></script>
+    <script src="<?php echo asset_url();?>vendor/bootstrap/js/bootstrap.js"></script>
+	<script src="<?php echo asset_url();?>vendor/bootstrap/js/offcanvas.js"></script>
 	
 	<script>
 		$('.dropdown-toggle').dropdown()

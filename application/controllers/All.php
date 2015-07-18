@@ -18,8 +18,20 @@ class All extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+    function __construct()
+    {
+        parent::__construct();
+    }
+
 	public function index()
 	{
-		$this->load->view('public\\allHome');
+        $response = array();
+        
+		$sidebarResponse = getSidebar();
+		$topPostResponse = getTopPost();
+        $userLoggedIn    = isUserLoggedIn();
+
+		$response = array_merge($response,$sidebarResponse,$topPostResponse,$userLoggedIn);
+		$this->load->view('public/allHome',$response);
 	}
 }

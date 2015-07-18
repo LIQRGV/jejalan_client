@@ -85,10 +85,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
         </div>
 		
         <div class="col-xs-12 col-sm-9">
-			<div class="row">
+			<div class="row content">
 				<div class="col-md-12" style="padding:2%;">
 					<div class="col-md-3">
-						<img src="<?php echo asset_url();?>img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+						<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
 					</div>
 					<div class="col-md-9">
 						<h3>Title 1 <small>By Username</small> </h3> 
@@ -100,7 +100,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 				<div class="col-md-12" style="padding:2%;">
 					<div class="col-md-3">
-						<img src="<?php echo asset_url();?>img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+						<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
 					</div>
 					<div class="col-md-9">
 						<h3>Title 1 <small>By Username</small> </h3> 
@@ -112,7 +112,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 				
 				<div class="col-md-12" style="padding:2%;">
 					<div class="col-md-3">
-						<img src="<?php echo asset_url();?>img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+						<img src="<?php echo asset_url();?>lib/img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
 					</div>
 					<div class="col-md-9">
 						<h3>Title 1 <small>By Username</small> </h3> 
@@ -134,11 +134,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
       </div><!--/row-->
 
       <hr>
-
+        <!--
       <footer>
         <p>&copy; Halo :D</p>
       </footer>
-
+        -->
     </div><!--/.container-->
 
     <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
@@ -146,6 +146,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- Include all compiled plugins (below), or include individual files as needed -->
     <script src="<?php echo asset_url();?>vendor/bootstrap/js/bootstrap.js"></script>
 	<script src="<?php echo asset_url();?>vendor/bootstrap/js/offcanvas.js"></script>
+    <script src="<?php echo asset_url();?>vendor/infinity_scroll/jquery.infinitescroll.min.js"></script>
 	
 	<script>
 		$('.dropdown-toggle').dropdown()

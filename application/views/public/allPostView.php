@@ -66,22 +66,121 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	
 	
     <div class="container">
-
       <div class="row row-offcanvas row-offcanvas-right">
-		
 		<div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
-          <div class="list-group">
-            <a href="#" class="list-group-item active">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-            <a href="#" class="list-group-item">Link</a>
-          </div>
+            <div class="panel-group">
+                <?php
+                if (isset($mappedRegionCity)) {
+                    foreach ($mappedRegionCity as $region) {
+                        ?>
+                        <div class="panel panel-default">
+                            <div class="panel-heading">
+                                <h4 class="panel-title">
+                                    <a data-toggle="collapse" data-parent="#accordion"
+                                       href="#<?php echo $region->namaRegion; ?>"
+                                       aria-expanded="false" class="collapsed"><span
+                                            class="glyphicon glyphicon-folder-close">
+                    </span>
+                                        <?php echo $region->namaRegion; ?>
+                                    </a>
+                                </h4>
+
+                            </div>
+                            <div id="<?php echo $region->namaRegion; ?>" class="panel-collapse collapse"
+                                 aria-expanded="false">
+                                <ul class="list-group">
+                                    <?php
+                                    foreach ($region->cities as $city) {
+                                        ?>
+                                        <li class="list-group-item">
+                                            <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                            <a href="#<?php echo $city->id;?>"><?php echo $city->cityName;?></a>
+                                        </li>
+                                    <?php
+                                    }
+                                    ?>
+                                </ul>
+                            </div>
+                        </div>
+                    <?php
+                    }
+                } else {
+                    ?>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne"
+                                   aria-expanded="false" class="collapsed"><span
+                                        class="glyphicon glyphicon-folder-close">
+                    </span>Region 1</a>
+                            </h4>
+                        </div>
+                        <div id="collapseOne" class="panel-collapse collapse" aria-expanded="false">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                    <a href="http://fb.com/moinakbarali">City 1</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                    <a href="http://fb.com/moinakbarali">City 2</a>
+                                </li>
+                                <li class="list-group-item">
+                                    <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                    <a href="http://fb.com/moinakbarali">City 3</a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFour"
+                                   class="collapsed" aria-expanded="false"><span class="glyphicon glyphicon-file">
+                    </span>Region 2</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFour" class="panel-collapse collapse" aria-expanded="false">
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="http://fb.com/moinakbarali">City 1</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="http://fb.com/moinakbarali">City 2</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="http://fb.com/moinakbarali">City 3</a>
+                            </li>
+                        </div>
+                    </div>
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <h4 class="panel-title">
+                                <a data-toggle="collapse" data-parent="#accordion" href="#collapseFive"
+                                   class="collapsed" aria-expanded="false"><span class="glyphicon glyphicon-heart">
+                    </span>Region 3</a>
+                            </h4>
+                        </div>
+                        <div id="collapseFive" class="panel-collapse collapse" aria-expanded="false"
+                             style="height: 0px;">
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="http://fb.com/moinakbarali">City 1</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="http://fb.com/moinakbarali">City 2</a>
+                            </li>
+                            <li class="list-group-item">
+                                <span class="glyphicon glyphicon-pencil text-primary"></span>
+                                <a href="http://fb.com/moinakbarali">City 3</a>
+                            </li>
+                        </div>
+                    </div>
+                <?php } ?>
+            </div>
         </div>
 		
         <div class="col-xs-12 col-sm-9">

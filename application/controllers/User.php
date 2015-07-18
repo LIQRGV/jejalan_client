@@ -20,6 +20,16 @@ class User extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('public\\allHome');
+		$this->load->view('user\\ownProfil');
 	}
+
+    public function id()
+    {
+        $this->load->view('user\\ownProfil');
+    }
+
+    public function edit()
+    {
+        $this->load->view('user\\ownProfilEdit');
+    }
 }

@@ -20,6 +20,95 @@ class Post extends CI_Controller {
 	 */
 	public function index()
 	{
-		$this->load->view('public\\allHome');
+		$response = array();
+        
+		$sidebarResponse = getSidebar();
+		$topPostResponse = getTopPost();
+		$response = array_merge($response,$sidebarResponse,$topPostResponse);
+		$this->load->view('public/allPost',$response);
 	}
+
+    public function next()
+    {
+        $this->load->view('public/allPost');
+    }
+
+    public function id( $postID = NULL)
+    {
+		$response = array();
+        
+		$sidebarResponse = getSidebar();
+		$topPostResponse = getTopPost();
+		$response = array_merge($response,$sidebarResponse,$topPostResponse);
+        //var_dump($postID);
+        if($postID == NULL || !is_numeric($postID))
+        {
+            $this->index();
+        } else {
+            $this->load->view('public/allPostView',$response);
+        }
+    }
+
+    public function create()
+    {
+        $this->load->view('user/ownPostCreate');
+    }
+
+    public function edit()
+    {
+        $this->load->view('user/ownPostCreate');
+    }
+
+    public function save()
+    {
+        $response = array();
+        $response["result"] = "empty";
+        if(isset($_FILES))
+        {
+            $target_dir = "assets/img/";
+            //$target_dir = '';
+            $uploadOk = 1;
+            $check = getimagesize($_FILES["image"]["tmp_name"]);
+            $imageUploadName = $_FILES["image"]["name"];
+            $imageFileType = pathinfo($imageUploadName)['extension'];
+
+            $fileMD5 = md5_file($_FILES["image"]["tmp_name"]);
+            $target_file = $fileMD5.'.'.$imageFileType;
+
+            if($check !== false) {
+                $response["success"][] =  "File is an image - " . $check["mime"] . ".";
+                $uploadOk = 1;
+            } else {
+                $response["error"][] = "File is not an image.";
+                $uploadOk = 0;
+            }
+
+            if (file_exists($target_dir.$target_file)) {
+                $response["error"][] = "File already exists.";
+                //$uploadOk = 0;
+            } else {
+                $response["success"][] = "File not exist yet";
+            }
+
+            if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
+                && $imageFileType != "gif" ) {
+                $response["error"][] = "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
+                $uploadOk = 0;
+            } else{
+                $response["success"][] = "File extension within allowed extension";
+            }
+
+            if ($uploadOk == 0) {
+                $response["result"] = "not complete";
+            } else {
+                if (move_uploaded_file($_FILES["image"]["tmp_name"], $target_dir.$target_file)) {
+                    $response["result"] = "success";
+                    $response["filename"] = $target_file;
+                } else {
+                    $response["result"] = "move upload fail";
+                }
+            }
+        }
+        echo json_encode($response);
+    }
 }
