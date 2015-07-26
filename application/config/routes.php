@@ -57,6 +57,7 @@ $route['Index/(:any)'] = 'All';
 
 $route['login'] = 'Auth/login';
 $route['register'] = 'Auth/register';
+$route['registerAction'] = 'Auth/registerAction';
 
 $route['Post/(:num)'] = 'Post/id/$1';
 $route['Post/create/(:num)'] = 'Post/edit/$1';

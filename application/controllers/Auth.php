@@ -27,4 +27,27 @@ class Auth extends CI_Controller {
 	{
         var_dump($this->input->post());
 	}
+	
+	public function register()
+	{
+		$response = array();
+		
+        $this->load->view('public/allRegistration',$response);
+	}
+	
+	public function registerAction()
+	{
+		$this->load->helper('jejalan_user');
+		$response = array();
+		
+        $allPost = $this->input->post();
+		//var_dump($allPost);
+		
+		$postUserResponse 	= postUser($allPost);
+		
+		if($postUserResponse['http_code'] == 202)
+			redirect(base_url());
+		else
+			redirect(base_url(). 'register');
+	}
 }

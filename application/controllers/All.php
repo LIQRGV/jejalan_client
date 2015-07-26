@@ -25,6 +25,9 @@ class All extends CI_Controller {
 
 	public function index()
 	{
+		$this->load->helper('jejalan_view');
+		$this->load->helper('jejalan_post');
+		$this->load->helper('jejalan_auth');
         $response = array();
         
 		$sidebarResponse = getSidebar();

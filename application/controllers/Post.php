@@ -20,6 +20,9 @@ class Post extends CI_Controller {
 	 */
 	public function index()
 	{
+		$this->load->helper('jejalan_view');
+		$this->load->helper('jejalan_post');
+		$this->load->helper('jejalan_auth');
 		$response = array();
         
 		$sidebarResponse = getSidebar();
@@ -35,12 +38,22 @@ class Post extends CI_Controller {
 
     public function id( $postID = NULL)
     {
+		$this->load->helper('jejalan_view');
+		$this->load->helper('jejalan_post');
+		$this->load->helper('jejalan_user');
+		$this->load->helper('jejalan_auth');		
+		
 		$response = array();
         
 		$sidebarResponse = getSidebar();
 		$topPostResponse = getTopPost();
-		$response = array_merge($response,$sidebarResponse,$topPostResponse);
-        //var_dump($postID);
+		$singlePostResponse = getPost($postID);		
+		$singlePostCommentResponse = getCommentByPost($postID);		
+		
+		$response = array_merge($response,$sidebarResponse,$topPostResponse,$singlePostResponse,$singlePostCommentResponse);
+		
+		$response['postID'] = $postID;
+        
         if($postID == NULL || !is_numeric($postID))
         {
             $this->index();

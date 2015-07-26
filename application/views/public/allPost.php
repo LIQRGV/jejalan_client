@@ -56,7 +56,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
               </ul>
             </li>
 			<li >
-				<a href="registrasi.html" >Sign-in</a>
+				<a href="register" >Sign-in</a>
 			</li>
           </ul>
 

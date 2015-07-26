@@ -44,19 +44,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
             <li class="dropdown ">
               <a href="#" class="dropdown-toggle " data-toggle="dropdown">Login <b class="caret"></b></a>
               <ul class="dropdown-menu">
-                <li style="margin:5px;">
-					<input type="text" class="form-control" placeholder="Username" required autofocus>
-				</li> 
-                <li style="margin:5px;">
-					<input type="text" class="form-control" placeholder="Password" required autofocus>
-				</li>
-                <li style="padding:5px;">
-					<button class="btn btn-info btn-block" >Login</button>
-				</li>
+				<form method="POST" action="<?php echo base_url()."login";?>">
+					<li style="margin:5px;">
+						<input type="text" class="form-control" placeholder="Username" name="username" required autofocus>
+					</li> 
+					<li style="margin:5px;">
+						<input type="text" class="form-control" placeholder="Password" name="password" required autofocus>
+					</li>
+					<li style="padding:5px;">
+						<button class="btn btn-info btn-block" >Login</button>
+					</li>
+				</form>
               </ul>
             </li>
 			<li >
-				<a href="registrasi.html" >Sign-in</a>
+				<a href="<?php echo base_url() . "register"; ?>" >Sign-in</a>
 			</li>
           </ul>
 
@@ -187,62 +189,46 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 			<div class="row">
 				<div class="col-md-12" style="padding:2%;">
 					<div class="col-md-3">
-						<img src="<?php echo asset_url();?>img/download.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+						<img src="<?php echo asset_url();?>img/<?php echo $fetchInfo->profilePicture;?>" class="img-responsive img-thumbnail center-block" alt="Responsive image">
 					</div>
-					<div class="col-md-9">
-						<h3>Title 1 <small>By Username</small> </h3> 
+					<div class="col-md-9"> 
+						<h3><?php echo $fetchPost[0]->title;?> <small>By <?php echo $fetchInfo->username;?></small> </h3> 
 						<p class="text-justify">
-						  Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Etiam porta sem malesuada magna mollis euismod. Donec sed odio dui.
+						  <?php echo $fetchPost[0]->content;?>
 						</p>
 					</div>
 				</div>
-				
-				
-				
 			</div>
 			<div class="row">
 				<div class="col-md-12">
 					
 					<div class="col-md-offset-3 col-md-9">
 						<div class="col-md-3">
-							<img src="<?php echo asset_url();?>img/download70.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+							<img src="<?php echo asset_url();?>img/<?php echo $fetchInfo->profilePicture;?>" class="img-responsive img-thumbnail center-block" alt="Responsive image">
 						</div>
 						<div class="col-md-9">
-							<textarea class="form-control" style="min-height:80px;" placeholder="Post Comment here..."></textarea>
+							<textarea class="form-control commentArea" style="min-height:80px;" placeholder="Post Comment here..."></textarea>
+							<button href="#" class="btn btn-info" id="post" value="<?php echo $postID;?>">Post</button>
 						</div>
 						
 					</div>
 				</div>
-				
+				<?php //var_dump($commentsUser);?>
 				<div class="col-md-12" style="background:#F6F6F6;margin-top:2%;padding:2%;">
-					
-					<div class="col-md-9">
-						<div class="col-md-3">
-							<img src="<?php echo asset_url();?>img/download70.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+					<div class="col-md-9" id="commentBlock">
+						<?php foreach($comments as $comment){?>
+						<div>
+							<div class="col-md-3">
+								<img src="<?php echo asset_url();?>img/<?php echo $commentsUser[$comment->userID]->profilePicture;?>" class="img-responsive img-thumbnail center-block" alt="Responsive image">
+							</div>
+							<div class="col-md-9">
+								<h4><?php echo $commentsUser[$comment->userID]->username;?></h4> 
+								<p>
+									<?php echo $comment->content;?>
+								</p>
+							</div>
 						</div>
-						<div class="col-md-9">
-							<h4>Username</h4> 
-							<p>
-								<p>Comment user..Comment user..Comment user..</p>
-								<p>Comment user..</p>
-								Comment user..
-								Comment user..
-							</p>
-						</div>
-						
-						<div class="col-md-3">
-							<img src="<?php echo asset_url();?>img/download70.svg" class="img-responsive img-thumbnail center-block" alt="Responsive image">
-						</div>
-						<div class="col-md-9">
-							<h4>Username</h4> 
-							<p>
-								Comment user..Comment user..Comment user..
-								Comment user..
-								Comment user..
-								Comment user..
-							</p>
-						</div>
-						
+						<?php } ?>
 					</div>
 				</div>
 				
@@ -276,7 +262,68 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 	<script src="<?php echo asset_url();?>vendor/bootstrap/js/offcanvas.js"></script>
 	
 	<script>
-		$('.dropdown-toggle').dropdown()
+		$('.dropdown-toggle').dropdown();
+	</script>
+	
+	<script>
+		$('button#post').click(
+			function()
+			{
+				var comment = $('.commentArea').val();
+				
+				$.ajax({
+					'url' : 'http://localhost/jejalan/Comment/save',
+					'data' : "comment="+comment+"&postID="+$(this).val(),
+					'type' : "POST"
+				}).complete(
+					function(data)
+					{
+						var responseText = data.responseText;
+						var result = $.parseJSON(responseText);
+						if(result.http_code == 202)
+						{
+							// block to add comment
+							var rowDiv = $('<div>');
+							var imgDiv = $('<div>');
+							var commentDiv = $('<div>');
+							
+							var temp;
+							
+							imgDiv.addClass('col-md-3');
+							
+							temp = $('<img>');
+							
+							temp.attr('src','none'); // add later
+							temp.attr('alt','Responsive image');
+							temp.addClass('img-responsive img-thumbnail center-block');
+							
+							imgDiv.append(temp);
+							
+							///////////
+							
+							commentDiv.addClass('col-md-9');
+							
+							temp = $('<h4>');
+							
+							temp.html('******');
+							
+							commentDiv.append(temp);
+							
+							temp = $('<p>');
+							
+							temp.html($('.commentArea').val());
+							
+							commentDiv.append(temp);
+							
+							rowDiv.append(imgDiv);
+							rowDiv.append(commentDiv);
+							
+							$('#commentBlock').append(rowDiv);
+						}
+					}
+				)
+			}
+		);
 	</script>
 	
   </body>

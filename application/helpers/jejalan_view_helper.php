@@ -5,7 +5,7 @@
        function getSidebar()
        {
           $response = array();
-        $allRegion = null;
+			$allRegion = null;
         $allCity = null;
         $mappedRegionCity = array();
 

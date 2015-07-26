@@ -1,6 +1,6 @@
 <?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
 
-	if ( ! function_exists('tiketRouter()'))
+	if ( ! function_exists('jejalanRouter()'))
     {
 		/** 
 		*	
@@ -9,7 +9,7 @@
 		* 	param included on tiket.com documentation for clarity
 		*	
 		*/
-       function tiketRouter($target, array $param, $custom = NULL)
+       function jejalanRouter($target, array $param, $custom = NULL)
 		{
 			$response = array();
 			
